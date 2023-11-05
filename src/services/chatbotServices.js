@@ -78,18 +78,18 @@ let sendGetStartedTemplate = () => {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Xin chào bạn đến với cửa hàng đồ chơi WorldZToy",
+                    "title": "Cửa hàng đồ chơi trẻ em WorldZToy xin kính chào quý khách",
                     "subtitle": "Hãy chọn dịch vụ mà bạn muốn",
                     "image_url": IMAGE_GET_STARTE,
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Tư vấn sản phẩm ",
+                            "title": "TƯ VẤN SẢN PHẨM ",
                             "payload": "TUVAN_SP",
                         },
                         {
                             "type": "postback",
-                            "title": "Phản hồi sản phẩm",
+                            "title": "PHẢN HỒI SẢN PHẨM",
                             "payload": "PHANHOI_SP",
                         }
 

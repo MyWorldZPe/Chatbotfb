@@ -198,10 +198,57 @@ let setupProfile = async (req, res) => {
     return res.send("Setup user profile succeeds!");
 }
 
+let setupPersistentMenu = async (req, res) => {
+    //call prifile facebook api
+    let request_body = {
+        "persistent_menu": [
+            {
+                "locale": "default",
+                "composer_input_disabled": false,
+                "call_to_actions": [
+                    {
+                        "type": "web_url",
+                        "title": "Talk to an agent",
+                        "payload": "CARE_HELP"
+                    },
+                    {
+                        "type": "web_url",
+                        "title": "Facebook ",
+                        "payload": "CURATION"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Khởi động lại bot",
+                        "payload": "RESTART_BOT"
+                    }
+                ]
+            }
+        ]
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/v18.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        console.log(body);
+        if (!err) {
+            console.log('Setup user profile succeeds!')
+        } else {
+            console.error("Unable to setup user profile succeeds!:" + err);
+        }
+    });
+
+    return res.send("Setup user profile succeeds!");
+}
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
-    setupProfile: setupProfile
+    setupProfile: setupProfile,
+    setupPersistentMenu: setupPersistentMenu
 
 }
