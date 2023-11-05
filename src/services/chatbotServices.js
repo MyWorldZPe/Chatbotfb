@@ -2,6 +2,7 @@ require('dotenv').config();
 import { response } from "express";
 import request from "request";
 
+const IMAGE_GET_STARTE = 'https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2014/10/kinh-doanh-do-choi-tre-em.jpg';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
@@ -57,9 +58,10 @@ let handleGetStarted = (sender_psid) => {
             let username = await getUserName(sender_psid);
             let response1 = { "text": `Xin chào ${username} đã đến với WorldZToy!` };
             let response2 = sendGetStartedTemplate();
-
-            //send messenge
-            await callSendAPI(sender_psid, response);
+            //send text messenge
+            await callSendAPI(sender_psid, response1);
+            //send generic template message
+            await callSendAPI(sender_psid, response2);
             resolve('done');
 
 
@@ -78,7 +80,7 @@ let sendGetStartedTemplate = () => {
                 "elements": [{
                     "title": "Xin chào bạn đến với cửa hàng đồ chơi WorldZToy",
                     "subtitle": "Hãy chọn dịch vụ mà bạn muốn",
-                    "image_url": attachment_url,
+                    "image_url": IMAGE_GET_STARTE,
                     "buttons": [
                         {
                             "type": "postback",
