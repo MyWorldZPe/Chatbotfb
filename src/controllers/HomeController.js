@@ -199,7 +199,7 @@ let setupProfile = async (req, res) => {
 }
 
 let setupPersistentMenu = async (req, res) => {
-    //call prifile facebook api
+    //call profile facebook api
     let request_body = {
         "persistent_menu": [
             {
@@ -225,7 +225,6 @@ let setupPersistentMenu = async (req, res) => {
             }
         ]
     }
-
     // Send the HTTP request to the Messenger Platform
     await request({
         "uri": `https://graph.facebook.com/v18.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`,
@@ -235,7 +234,7 @@ let setupPersistentMenu = async (req, res) => {
     }, (err, res, body) => {
         console.log(body);
         if (!err) {
-            console.log('Setup user profile succeeds!')
+            console.log('Setup persistent menu succeeds!')
         } else {
             console.error("Unable to setup user profile succeeds!:" + err);
         }
