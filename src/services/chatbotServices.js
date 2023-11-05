@@ -55,14 +55,48 @@ let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let username = await getUserName(sender_psid);
-            let response = { "text": `Xin chào bạn ${username} đã đến với WorldZToy` };
+            let response1 = { "text": `Xin chào ${username} đã đến với WorldZToy!` };
+            let response2 = sendGetStartedTemplate();
+
+            //send messenge
             await callSendAPI(sender_psid, response);
             resolve('done');
+
 
         } catch (e) {
             reject(e);
         }
     });
+}
+
+let sendGetStartedTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Xin chào bạn đến với cửa hàng đồ chơi WorldZToy",
+                    "subtitle": "Hãy chọn dịch vụ mà bạn muốn",
+                    "image_url": attachment_url,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Tư vấn sản phẩm ",
+                            "payload": "TUVAN_SP",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "Phản hồi sản phẩm",
+                            "payload": "PHANHOI_SP",
+                        }
+
+                    ],
+                }]
+            }
+        }
+    }
+    return response;
 }
 
 module.exports = {
