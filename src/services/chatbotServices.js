@@ -1,5 +1,4 @@
 require('dotenv').config();
-import { resolveInclude } from "ejs";
 import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -30,7 +29,7 @@ let handleGetStarted = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let response = { "text": "Xin chào bạn đã đến với WorldZToy" };
-            await callSendAPI(response);
+            await callSendAPI(sender_psid, response);
             resolve('done');
 
         } catch (e) {
