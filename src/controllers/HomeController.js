@@ -199,7 +199,6 @@ let setupProfile = async (req, res) => {
 }
 
 let setupPersistentMenu = async (req, res) => {
-    //call profile facebook api
     let request_body = {
         "persistent_menu": [
             {
@@ -208,13 +207,15 @@ let setupPersistentMenu = async (req, res) => {
                 "call_to_actions": [
                     {
                         "type": "web_url",
-                        "title": "Talk to an agent",
-                        "payload": "CARE_HELP"
+                        "title": "Facebook cửa hàng đồ chơi WorldZToy",
+                        "url": "https://www.facebook.com/profile.php?id=61552596584118",
+                        "webview_height_radio": "full"
                     },
                     {
                         "type": "web_url",
-                        "title": "Facebook ",
-                        "payload": "CURATION"
+                        "title": "Facebook Leader Quang Vinh <3 ",
+                        "url": "https://www.facebook.com/ngoquang.vinh.395",
+                        "webview_height_radio": "full"
                     },
                     {
                         "type": "postback",
@@ -240,7 +241,7 @@ let setupPersistentMenu = async (req, res) => {
         }
     });
 
-    return res.send("Setup user profile succeeds!");
+    return res.send("Setup persistent menu succeeds!");
 }
 
 module.exports = {
