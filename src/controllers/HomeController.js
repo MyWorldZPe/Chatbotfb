@@ -207,15 +207,15 @@ let setupPersistentMenu = async (req, res) => {
                 "call_to_actions": [
                     {
                         "type": "web_url",
-                        "title": "Facebook cửa hàng đồ chơi WorldZToy",
+                        "title": "Facebook WorldZToy",
                         "url": "https://www.facebook.com/profile.php?id=61552596584118",
-                        "webview_height_radio": "full"
+                        "webview_height_ratio": "full"
                     },
                     {
                         "type": "web_url",
                         "title": "Facebook Leader Quang Vinh <3 ",
                         "url": "https://www.facebook.com/ngoquang.vinh.395",
-                        "webview_height_radio": "full"
+                        "webview_height_ratio": "full"
                     },
                     {
                         "type": "postback",
@@ -228,7 +228,7 @@ let setupPersistentMenu = async (req, res) => {
     }
     // Send the HTTP request to the Messenger Platform
     await request({
-        "uri": `https://graph.facebook.com/v18.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`,
+        "uri": `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
         "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
