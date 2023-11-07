@@ -57,13 +57,13 @@ let handleGetStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid);
             let response1 = {
-                "text": `Xin chào ${username} đã đến với WorldZToy! 
-            Xin hãy chờ một chút, chúng tôi sẽ nhắn tin cho bạn sớm nhất có thể !!!` };
-            let response2 = sendGetStartedTemplate();
+                "text": `Xin chào ${username} đã đến với WorldZToy!
+            Chúng tôi sẽ nhắn tin cho bạn sớm nhất có thể` };
+            // let response2 = sendGetStartedTemplate();
             //send text messenge
             await callSendAPI(sender_psid, response1);
             //send generic template message
-            await callSendAPI(sender_psid, response2);
+            // await callSendAPI(sender_psid, response2);
             resolve('done');
 
 

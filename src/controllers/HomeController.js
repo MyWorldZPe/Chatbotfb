@@ -73,47 +73,47 @@ let getWebhook = (req, res) => {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
 
-    // let response;
+    let response;
 
-    // // Checks if the message contains text
-    // if (received_message.text) {
-    //     // Create the payload for a basic text message, which
-    //     // will be added to the body of our request to the Send API
-    //     response = {
-    //         "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-    //     }
-    // } else if (received_message.attachments) {
-    //     // Get the URL of the message attachment
-    //     let attachment_url = received_message.attachments[0].payload.url;
-    //     // response = {
-    //     //     "attachment": {
-    //     //         "type": "template",
-    //     //         "payload": {
-    //     //             "template_type": "generic",
-    //     //             "elements": [{
-    //     //                 "title": "Is this the right picture?",
-    //     //                 "subtitle": "Tap a button to answer.",
-    //     //                 "image_url": attachment_url,
-    //     //                 "buttons": [
-    //     //                     {
-    //     //                         "type": "postback",
-    //     //                         "title": "Yes!",
-    //     //                         "payload": "yes",
-    //     //                     },
-    //     //                     {
-    //     //                         "type": "postback",
-    //     //                         "title": "No!",
-    //     //                         "payload": "no",
-    //     //                     }
-    //     //                 ],
-    //     //             }]
-    //     //         }
-    //     //     }
-    //     // }
-    // }
+    // Checks if the message contains text
+    if (received_message.text) {
+        // Create the payload for a basic text message, which
+        // will be added to the body of our request to the Send API
+        // response = {
+        //     "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+        // }
+    } else if (received_message.attachments) {
+        // Get the URL of the message attachment
+        let attachment_url = received_message.attachments[0].payload.url;
+        // response = {
+        //     "attachment": {
+        //         "type": "template",
+        //         "payload": {
+        //             "template_type": "generic",
+        //             "elements": [{
+        //                 "title": "Is this the right picture?",
+        //                 "subtitle": "Tap a button to answer.",
+        //                 "image_url": attachment_url,
+        //                 "buttons": [
+        //                     {
+        //                         "type": "postback",
+        //                         "title": "Yes!",
+        //                         "payload": "yes",
+        //                     },
+        //                     {
+        //                         "type": "postback",
+        //                         "title": "No!",
+        //                         "payload": "no",
+        //                     }
+        //                 ],
+        //             }]
+        //         }
+        //     }
+        // }
+    }
 
-    // // Send the response message
-    // callSendAPI(sender_psid, response);
+    // Send the response message
+    callSendAPI(sender_psid, response);
 }
 
 // Handles messaging_postbacks events
@@ -202,57 +202,58 @@ let setupProfile = async (req, res) => {
     return res.send("Setup user profile succeeds!");
 }
 
-let setupPersistentMenu = async (req, res) => {
-    let request_body = {
-        "persistent_menu": [
-            {
-                "locale": "default",
-                "composer_input_disabled": false,
-                "call_to_actions": [
-                    {
-                        "type": "web_url",
-                        "title": "Facebook WorldZToy",
-                        "url": "https://www.facebook.com/profile.php?id=61552596584118",
-                        "webview_height_ratio": "full"
-                    },
-                    {
-                        "type": "web_url",
-                        "title": "Facebook Leader Quang Vinh <3 ",
-                        "url": "https://www.facebook.com/ngoquang.vinh.395",
-                        "webview_height_ratio": "full"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "Khởi động lại bot",
-                        "payload": "RESTART_BOT"
-                    }
-                ]
-            }
-        ]
-    }
-    // Send the HTTP request to the Messenger Platform
-    await request({
-        "uri": `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        console.log(body);
-        if (!err) {
-            console.log('Setup persistent menu succeeds!')
-        } else {
-            console.error("Unable to setup user profile succeeds!:" + err);
-        }
-    });
+// let setupPersistentMenu = async (req, res) => {
+//     let request_body = {
+//         "persistent_menu": [
+//             {
+//                 "locale": "default",
+//                 "composer_input_disabled": false,
+//                 "call_to_actions": [
+//                     {
+//                         "type": "web_url",
+//                         "title": "Facebook WorldZToy",
+//                         "url": "https://www.facebook.com/profile.php?id=61552596584118",
+//                         "webview_height_ratio": "full"
+//                     },
+//                     {
+//                         "type": "web_url",
+//                         "title": "Facebook Leader Quang Vinh <3 ",
+//                         "url": "https://www.facebook.com/ngoquang.vinh.395",
+//                         "webview_height_ratio": "full"
+//                         // },
+//                         // {
+//                         //     "type": "postback",
+//                         //     "title": "Khởi động lại bot",
+//                         //     "payload": "RESTART_BOT"
+//                         //
+//                     }
+//                 ]
+//             }
+//         ]
+//     }
+//     // Send the HTTP request to the Messenger Platform
+//     await request({
+//         "uri": `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+//         "qs": { "access_token": PAGE_ACCESS_TOKEN },
+//         "method": "POST",
+//         "json": request_body
+//     }, (err, res, body) => {
+//         console.log(body);
+//         if (!err) {
+//             console.log('Setup persistent menu succeeds!')
+//         } else {
+//             console.error("Unable to setup user profile succeeds!:" + err);
+//         }
+//     });
 
-    return res.send("Setup persistent menu succeeds!");
-}
+//     return res.send("Setup persistent menu succeeds!");
+// }
 
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    setupPersistentMenu: setupPersistentMenu
+    // setupPersistentMenu: setupPersistentMenu
 
 }
