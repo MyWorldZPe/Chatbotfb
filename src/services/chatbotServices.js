@@ -56,7 +56,9 @@ let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let username = await getUserName(sender_psid);
-            let response1 = { "text": `Xin chào ${username} đã đến với WorldZToy!` };
+            let response1 = {
+                "text": `Xin chào ${username} đã đến với WorldZToy! 
+            Xin hãy chờ một chút, chúng tôi sẽ nhắn tin cho bạn sớm nhất có thể !!!` };
             let response2 = sendGetStartedTemplate();
             //send text messenge
             await callSendAPI(sender_psid, response1);
@@ -71,36 +73,53 @@ let handleGetStarted = (sender_psid) => {
     });
 }
 
-let sendGetStartedTemplate = () => {
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Cửa hàng đồ chơi trẻ em WorldZToy xin kính chào quý khách",
-                    "subtitle": "Hãy chọn dịch vụ mà bạn muốn",
-                    "image_url": IMAGE_GET_STARTE,
-                    "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "TƯ VẤN SẢN PHẨM ",
-                            "payload": "TUVAN_SP",
-                        },
-                        {
-                            "type": "postback",
-                            "title": "PHẢN HỒI SẢN PHẨM",
-                            "payload": "PHANHOI_SP",
-                        }
+// let sendGetStartedTemplate = () => {
+//     let response = {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "generic",
+//                 "elements": [{
+//                     "title": "Cửa hàng đồ chơi trẻ em WorldZToy xin kính chào quý khách",
+//                     "subtitle": "Hãy chọn dịch vụ mà bạn muốn",
+//                     "image_url": IMAGE_GET_STARTE,
+//                     "buttons": [
+//                         {
+//                             "type": "postback",
+//                             "title": "TƯ VẤN SẢN PHẨM ",
+//                             "payload": "TUVAN_SP",
+//                         },
+//                         {
+//                             "type": "postback",
+//                             "title": "PHẢN HỒI SẢN PHẨM",
+//                             "payload": "PHANHOI_SP",
+//                         }
 
-                    ],
-                }]
-            }
-        }
-    }
-    return response;
-}
+//                     ],
+//                 }]
+//             }
+//         }
+//     }
+//     return response;
+// }
+
+// let handleSendTUVANSP = (sender_psid,) => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+
+//             let response1 = getSendTUVANSPTemplate();
+//             //send text messenge
+//             await callSendAPI(sender_psid, response1);
+
+
+
+//         } catch (e) {
+//             reject(e);
+//         }
+//     });
+// }
 
 module.exports = {
-    handleGetStarted: handleGetStarted
+    handleGetStarted: handleGetStarted,
+    handleSendTUVANSP: handleSendTUVANSP,
 }
